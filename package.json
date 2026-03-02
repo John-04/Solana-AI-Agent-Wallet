@@ -1,0 +1,30 @@
+{
+  "name": "ai-agent-wallet",
+  "version": "1.0.0",
+  "description": "AI Agent Wallet for Solana Devnet",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node --project tsconfig.json src/index.ts",
+    "dev": "ts-node --project tsconfig.json src/index.ts",
+    "build": "tsc",
+    "server": "ts-node --project tsconfig.json src/api/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.98.4",
+    "bs58": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
