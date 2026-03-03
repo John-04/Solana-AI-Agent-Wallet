@@ -2,9 +2,9 @@
   "name": "ai-agent-wallet",
   "version": "1.0.0",
   "description": "AI Agent Wallet for Solana Devnet",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node --project tsconfig.json src/index.ts",
+    "start": "node dist/index.js",
     "dev": "ts-node --project tsconfig.json src/index.ts",
     "build": "tsc",
     "server": "ts-node --project tsconfig.json src/api/server.ts"
