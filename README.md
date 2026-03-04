@@ -270,15 +270,14 @@ Every action is recorded with:
 - **Environment variables** — Sensitive config managed via .env file
 - **Input validation** — All API endpoints validate inputs before processing
 - **Error boundaries** — All async operations wrapped in try/catch to prevent crashes
-- **Separation of concerns** — Agent logic completely decoupled from wallet operations
+- **Separation of concerns** — Agent logic is completely decoupled from wallet operations
 
 ---
 
 ## 🌐 Live Demo
-
-- 🖥️ **Frontend Dashboard**: [Coming Soon]
-- 🔗 **API Base URL**: [Coming Soon]
-- 📹 **Demo Video**: [Coming Soon]
+- 🖥️ Frontend Dashboard: https://solana-ai-agent-wallet.vercel.app
+- 🔗 API Base URL: https://solana-ai-agent-wallet.onrender.com
+- 📁 GitHub: https://github.com/John-04/Solana-AI-Agent-Wallet
 
 ---
 
