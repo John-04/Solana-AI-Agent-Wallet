@@ -170,6 +170,10 @@ app.post("/defi/swap", async (req, res) => {
 app.get("/agent/portfolio", (req, res) => {
   res.json(agent.getPortfolio());
 });
+app.post("/defi/start", (req, res) => {
+  defiEngine.runStrategyLoop();
+  res.json({ message: "DeFi strategy started", status: "running" });
+});
 app.post("/defi/stop", (req, res) => {
   defiEngine.stopStrategy();
   res.json({ message: "DeFi strategy stopped" });
