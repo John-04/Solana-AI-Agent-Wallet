@@ -167,6 +167,9 @@ app.post("/defi/swap", async (req, res) => {
 });
 
 // Stop DeFi strategy
+app.get("/agent/portfolio", (req, res) => {
+  res.json(agent.getPortfolio());
+});
 app.post("/defi/stop", (req, res) => {
   defiEngine.stopStrategy();
   res.json({ message: "DeFi strategy stopped" });

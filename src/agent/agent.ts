@@ -1,4 +1,5 @@
 import { WalletManager } from "../wallet/walletManager";
+import { AgentWalletSDK } from "../sdk/AgentWalletSDK";
 
 interface AgentWallet {
   publicKey: string;
@@ -7,17 +8,30 @@ interface AgentWallet {
 }
 
 interface AgentAction {
-  type: "SEND" | "AIRDROP" | "CHECK_BALANCE" | "CREATE_WALLET";
+  type: "SEND" | "AIRDROP" | "CHECK_BALANCE" | "CREATE_WALLET" | "MEMO" | "PORTFOLIO_REBALANCE";
   payload: any;
   timestamp: string;
   result?: string;
+  onChainSignature?: string;
+  explorerUrl?: string;
+}
+
+interface PortfolioWallet {
+  publicKey: string;
+  privateKey: string;
+  label: string;
+  balance: number;
+  allocation: number;
 }
 
 export class AIAgent {
   private walletManager: WalletManager;
+  private sdk: AgentWalletSDK | null = null;
   private agentWallet: AgentWallet | null = null;
   private actionHistory: AgentAction[] = [];
   private isRunning: boolean = false;
+  private portfolio: PortfolioWallet[] = [];
+  private cycleCount: number = 0;
 
   constructor() {
     this.walletManager = new WalletManager();
@@ -26,10 +40,7 @@ export class AIAgent {
   async initialize(): Promise<void> {
     console.log("🤖 Initializing AI Agent...");
     const wallet = this.walletManager.createWallet();
-
-    // Request airdrop to fund the agent
     await this.walletManager.requestAirdrop(wallet.publicKey, 1);
-
     const balance = await this.walletManager.getBalance(wallet.publicKey);
 
     this.agentWallet = {
@@ -38,8 +49,41 @@ export class AIAgent {
       balance,
     };
 
+    // Initialize SDK with agent wallet
+    this.sdk = new AgentWalletSDK({
+      privateKey: wallet.privateKey,
+      network: "devnet",
+    });
+
+    // Create initial portfolio wallets
+    await this.initializePortfolio();
+
     console.log(`🤖 Agent wallet ready: ${this.agentWallet.publicKey}`);
     console.log(`💰 Agent balance: ${balance} SOL`);
+  }
+
+  private async initializePortfolio(): Promise<void> {
+    console.log("📊 Initializing portfolio...");
+    const labels = ["Trading", "Reserve", "Operations"];
+    const allocations = [0.4, 0.4, 0.2];
+
+    for (let i = 0; i < 3; i++) {
+      const wallet = this.walletManager.createWallet();
+      this.portfolio.push({
+        publicKey: wallet.publicKey,
+        privateKey: wallet.privateKey,
+        label: labels[i],
+        balance: 0,
+        allocation: allocations[i],
+      });
+      console.log(`✅ Portfolio wallet created: ${labels[i]} — ${wallet.publicKey}`);
+    }
+  }
+
+  private async updatePortfolioBalances(): Promise<void> {
+    for (const wallet of this.portfolio) {
+      wallet.balance = await this.walletManager.getBalance(wallet.publicKey);
+    }
   }
 
   private async logAction(action: AgentAction): Promise<void> {
@@ -48,24 +92,48 @@ export class AIAgent {
   }
 
   async decideAndAct(): Promise<AgentAction> {
-    if (!this.agentWallet) throw new Error("Agent not initialized");
+    if (!this.agentWallet || !this.sdk) throw new Error("Agent not initialized");
 
-    // Refresh balance
+    this.cycleCount++;
     this.agentWallet.balance = await this.walletManager.getBalance(
       this.agentWallet.publicKey
     );
 
-    console.log(`🧠 Agent thinking... Current balance: ${this.agentWallet.balance} SOL`);
+    await this.updatePortfolioBalances();
+
+    console.log(`\n🧠 Agent thinking... Cycle #${this.cycleCount}`);
+    console.log(`💰 Current balance: ${this.agentWallet.balance} SOL`);
 
     let action: AgentAction;
 
-    // Agent decision logic
-    if (this.agentWallet.balance < 0.5) {
-      // Low balance — request airdrop
+    // Cycle 1: Write strategy memo on-chain
+    if (this.cycleCount % 5 === 1) {
+      console.log("🤖 Decision: Writing strategy memo on-chain...");
+      try {
+        const memo = `AI Agent Cycle #${this.cycleCount}: Balance=${this.agentWallet.balance} SOL, Portfolio=${this.portfolio.length} wallets, Strategy=MOMENTUM`;
+        const result = await this.sdk.sendMemo(memo);
+        action = {
+          type: "MEMO",
+          payload: { memo },
+          timestamp: new Date().toISOString(),
+          result: `Memo written on-chain`,
+          onChainSignature: result.signature,
+          explorerUrl: result.explorerUrl,
+        };
+      } catch (error) {
+        action = {
+          type: "CHECK_BALANCE",
+          payload: { balance: this.agentWallet.balance },
+          timestamp: new Date().toISOString(),
+          result: `Balance: ${this.agentWallet.balance} SOL`,
+        };
+      }
+    }
+    // Low balance: request airdrop
+    else if (this.agentWallet.balance < 0.5) {
       console.log("🤖 Decision: Balance low, requesting airdrop...");
       const result = await this.walletManager.requestAirdrop(
-        this.agentWallet.publicKey,
-        1
+        this.agentWallet.publicKey, 1
       );
       action = {
         type: "AIRDROP",
@@ -73,38 +141,65 @@ export class AIAgent {
         timestamp: new Date().toISOString(),
         result,
       };
-    } else if (this.agentWallet.balance > 1.5) {
-      // High balance — create a new wallet and send some SOL to it
-      console.log("🤖 Decision: Balance high, creating sub-wallet and distributing SOL...");
-      const newWallet = this.walletManager.createWallet();
-      await this.walletManager.requestAirdrop(newWallet.publicKey, 0.1);
+    }
+    // High balance: rebalance portfolio
+    else if (this.agentWallet.balance > 1.5) {
+      console.log("🤖 Decision: Rebalancing portfolio...");
+      const targetWallet = this.portfolio[this.cycleCount % this.portfolio.length];
+      const amount = 0.05;
 
-      const result = await this.walletManager.sendSOL(
-        this.agentWallet.privateKey,
-        newWallet.publicKey,
-        0.1
-      );
-      action = {
-        type: "SEND",
-        payload: {
-          from: this.agentWallet.publicKey,
-          to: newWallet.publicKey,
-          amount: 0.1,
-        },
-        timestamp: new Date().toISOString(),
-        result,
-      };
-    } else {
-      // Just check balance
-      console.log("🤖 Decision: Balance nominal, monitoring...");
+      try {
+        const signature = await this.walletManager.sendSOL(
+          this.agentWallet.privateKey,
+          targetWallet.publicKey,
+          amount
+        );
+
+        // Record rebalance decision on-chain
+        try {
+          await this.sdk.sendMemo(
+            `Portfolio rebalance: Sent ${amount} SOL to ${targetWallet.label} wallet`
+          );
+        } catch {}
+
+        action = {
+          type: "PORTFOLIO_REBALANCE",
+          payload: {
+            from: this.agentWallet.publicKey,
+            to: targetWallet.publicKey,
+            label: targetWallet.label,
+            amount,
+          },
+          timestamp: new Date().toISOString(),
+          result: signature,
+          onChainSignature: signature,
+          explorerUrl: `https://explorer.solana.com/tx/${signature}?cluster=devnet`,
+        };
+      } catch (error: any) {
+        action = {
+          type: "CHECK_BALANCE",
+          payload: { balance: this.agentWallet.balance },
+          timestamp: new Date().toISOString(),
+          result: `Rebalance failed: ${error.message}`,
+        };
+      }
+    }
+    // Normal: monitor and log
+    else {
+      console.log("🤖 Decision: Monitoring portfolio...");
+      const portfolioSummary = this.portfolio
+        .map((w) => `${w.label}:${w.balance.toFixed(4)}SOL`)
+        .join(", ");
+
       action = {
         type: "CHECK_BALANCE",
         payload: {
           wallet: this.agentWallet.publicKey,
           balance: this.agentWallet.balance,
+          portfolio: portfolioSummary,
         },
         timestamp: new Date().toISOString(),
-        result: `Balance: ${this.agentWallet.balance} SOL`,
+        result: `Balance: ${this.agentWallet.balance} SOL | Portfolio: ${portfolioSummary}`,
       };
     }
 
@@ -139,5 +234,9 @@ export class AIAgent {
 
   getAgentWallet(): AgentWallet | null {
     return this.agentWallet;
+  }
+
+  getPortfolio(): PortfolioWallet[] {
+    return this.portfolio;
   }
 }
