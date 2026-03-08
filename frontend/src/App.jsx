@@ -442,11 +442,11 @@ export default function App() {
                 <h2 style={{ margin: 0, fontSize: "16px", color: "#6366f1" }}>◎ DeFi Strategy Engine</h2>
                 <span style={{
                   fontSize: "11px", fontWeight: "700", padding: "4px 12px", borderRadius: "100px",
-                  background: defiData?.isRunning ? "rgba(0,255,163,0.15)" : "rgba(255,107,107,0.15)",
-                  color: defiData?.isRunning ? "#00ffa3" : "#ff6b6b",
-                  border: `1px solid ${defiData?.isRunning ? "rgba(0,255,163,0.3)" : "rgba(255,107,107,0.3)"}`,
+                  background: defiData?.isActive ? "rgba(0,255,163,0.15)" : "rgba(255,107,107,0.15)",
+                  color: defiData?.isActive ? "#00ffa3" : "#ff6b6b",
+                  border: `1px solid ${defiData?.isActive ? "rgba(0,255,163,0.3)" : "rgba(255,107,107,0.3)"}`,
                 }}>
-                  {defiData?.isRunning ? "● ACTIVE" : "○ STOPPED"}
+                  {defiData?.isActive ? "● ACTIVE" : "○ STOPPED"}
                 </span>
               </div>
               <p style={{ margin: "0 0 20px", color: "#64748b", fontSize: "12px" }}>
