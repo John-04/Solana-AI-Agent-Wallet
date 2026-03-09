@@ -15,7 +15,7 @@ const VERIFIED_TXS = [
   }
 ];
 
-const SDK_EXAMPLE = `import { AgentWalletSDK } from "ai-agent-wallet";
+const SDK_EXAMPLE = `import { AgentWalletSDK } from "ai-agent-wallet-sdk";
 
 // Any AI agent can use this — LangChain, AutoGen, ElizaOS
 const sdk = new AgentWalletSDK({ network: "devnet" });
@@ -585,28 +585,50 @@ export default function App() {
             <div style={{ background: "rgba(6,182,212,0.05)", border: "1px solid rgba(6,182,212,0.2)",
               borderRadius: "12px", padding: "24px" }}>
               <h2 style={{ margin: "0 0 8px", fontSize: "16px", color: "#06b6d4" }}>⟨⟩ AgentWalletSDK</h2>
+              
+              {/* NPM Badge */}
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px", flexWrap: "wrap" }}>
+                <a href="https://www.npmjs.com/package/ai-agent-wallet-sdk" target="_blank" rel="noopener noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "8px 16px",
+                    background: "rgba(204,0,0,0.15)", border: "1px solid rgba(204,0,0,0.4)",
+                    borderRadius: "6px", textDecoration: "none", color: "#ff6b6b", fontSize: "13px", fontWeight: "700" }}>
+                  ⬡ npm install ai-agent-wallet-sdk
+                </a>
+                <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "4px",
+                  background: "rgba(0,255,163,0.1)", border: "1px solid rgba(0,255,163,0.3)", color: "#00ffa3" }}>
+                  ✓ PUBLISHED v1.0.0
+                </span>
+              </div>
+
               <p style={{ margin: "0 0 20px", color: "#94a3b8", fontSize: "13px", lineHeight: "1.7" }}>
-                The most important feature for the bounty: a standalone SDK that <strong style={{color:"#e2e8f0"}}>any AI agent framework
-                can use outside the browser</strong>. LangChain tools, AutoGen agents, ElizaOS plugins, and custom Python/TypeScript
-                scripts can all import this SDK and control the wallet programmatically.
+                The most important feature for the bounty: a standalone SDK <strong style={{color:"#e2e8f0"}}>published on npm</strong> that any AI agent framework
+                can use outside the browser. LangChain tools, AutoGen agents, ElizaOS plugins, and custom Python/TypeScript
+                scripts can all install this SDK and control the wallet programmatically.
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px", marginBottom: "24px" }}>
-                {[
-                  { icon: "🔗", label: "LangChain", desc: "Use as a tool in LangChain agents" },
-                  { icon: "🤖", label: "AutoGen", desc: "Wrap as AutoGen function tool" },
-                  { icon: "⚡", label: "ElizaOS", desc: "Plugin for Eliza AI agents" },
-                  { icon: "🐍", label: "Any Script", desc: "Import in any TS/JS program" },
-                ].map(f => (
-                  <div key={f.label} style={{
-                    background: "rgba(6,182,212,0.06)", border: "1px solid rgba(6,182,212,0.15)",
-                    borderRadius: "8px", padding: "14px", textAlign: "center",
+              {/* LangChain Proof */}
+              <div style={{ background: "rgba(0,255,163,0.05)", border: "1px solid rgba(0,255,163,0.2)",
+                borderRadius: "10px", padding: "20px", marginBottom: "20px" }}>
+                <div style={{ fontSize: "11px", color: "#00ffa3", fontWeight: "700", letterSpacing: "1px", marginBottom: "10px" }}>
+                  ✓ PROVEN — LANGCHAIN AI AGENT REAL ON-CHAIN TRANSACTION
+                </div>
+                <p style={{ margin: "0 0 10px", color: "#94a3b8", fontSize: "12px", lineHeight: "1.6" }}>
+                  A LangChain AI agent installed this SDK, analyzed the market, made an autonomous BUY decision,
+                  and recorded it permanently on Solana blockchain. No browser. No UI. No human.
+                </p>
+                <div style={{ background: "#0d1117", borderRadius: "6px", padding: "10px", marginBottom: "10px",
+                  fontSize: "10px", color: "#64748b", wordBreak: "break-all", fontFamily: "monospace" }}>
+                  Sig: 2WXDieLCHpeSPsdWvUbC2AvzyVWAFyfEKPNs2GpdRjynFwvx93q3QvELbV2ofN6BvecHSbKtumgofgU2d9T3B1h
+                </div>
+                <a href="https://explorer.solana.com/tx/2WXDieLCHpeSPsdWvUbC2AvzyVWAFyfEKPNs2GpdRjynFwvx93q3QvELbV2ofN6BvecHSbKtumgofgU2d9T3B1h?cluster=devnet"
+                  target="_blank" rel="noopener noreferrer" style={{
+                    display: "inline-flex", alignItems: "center", gap: "6px",
+                    padding: "8px 16px", borderRadius: "6px", textDecoration: "none",
+                    background: "rgba(0,255,163,0.1)", border: "1px solid rgba(0,255,163,0.3)",
+                    color: "#00ffa3", fontSize: "12px", fontWeight: "700", fontFamily: "inherit",
                   }}>
-                    <div style={{ fontSize: "24px", marginBottom: "6px" }}>{f.icon}</div>
-                    <div style={{ fontSize: "12px", fontWeight: "700", color: "#06b6d4", marginBottom: "4px" }}>{f.label}</div>
-                    <div style={{ fontSize: "11px", color: "#64748b" }}>{f.desc}</div>
-                  </div>
-                ))}
+                  ⛓ Verify LangChain Transaction on Explorer →
+                </a>
               </div>
 
               <div style={{ marginBottom: "16px" }}>
