@@ -324,8 +324,3 @@ python3 langchain_agent_demo.py
 ## 📄 License
 
 MIT License — open source, free to use and modify.
-
----
-
-*Built for Superteam Nigeria DeFi Developer Challenge 2026*
-README_EOF
