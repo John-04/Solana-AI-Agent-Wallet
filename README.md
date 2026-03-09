@@ -1,297 +1,331 @@
-# 🤖 AI Agent Wallet — Autonomous DeFi Wallet for Solana
+# 🤖 AI Agent Wallet
 
-> A fully autonomous AI agent wallet built on Solana Devnet, capable of creating wallets, signing transactions, managing SOL/SPL tokens, and interacting with DeFi protocols — all without human intervention.
+> An autonomous DeFi wallet on Solana Devnet — built for AI agents to control programmatically without any human intervention.
 
----
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://solana-ai-agent-wallet.vercel.app)
+[![API](https://img.shields.io/badge/API-Render-blue?style=for-the-badge)](https://solana-ai-agent-wallet.onrender.com)
+[![npm](https://img.shields.io/badge/npm-ai--agent--wallet--sdk-red?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/ai-agent-wallet-sdk)
+[![GitHub](https://img.shields.io/badge/GitHub-Open%20Source-green?style=for-the-badge&logo=github)](https://github.com/John-04/Solana-AI-Agent-Wallet)
 
-## 📌 Table of Contents
-
-- [Overview](#overview)
-- [How It Works](#how-it-works)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Project](#running-the-project)
-- [API Documentation](#api-documentation)
-- [Agent Decision Logic](#agent-decision-logic)
-- [Security Considerations](#security-considerations)
-- [Live Demo](#live-demo)
-- [Team](#team)
+Built for the **Superteam Nigeria DeFi Developer Challenge 2026** — demonstrating that AI agents can be first-class participants in DeFi, not just observers.
 
 ---
 
-## 🧠 Overview
+## 🌐 Live Links
 
-AI agents on Solana are becoming autonomous participants in the DeFi ecosystem. For these agents to act independently — executing trades, managing liquidity, or interacting with dApps — they need wallets they fully control.
-
-This project implements a **prototype AI agent wallet** that demonstrates autonomous transaction capabilities in a sandboxed Solana Devnet environment. The agent:
-
-- Creates and manages its own wallets programmatically
-- Signs and sends transactions without any human input
-- Makes real-time decisions based on its balance state
-- Exposes a full REST API for external integrations
-- Provides a live dashboard to observe all agent actions in real time
+| Resource | URL |
+|----------|-----|
+| Frontend Dashboard | https://solana-ai-agent-wallet.vercel.app |
+| Backend REST API | https://solana-ai-agent-wallet.onrender.com |
+| npm SDK Package | https://www.npmjs.com/package/ai-agent-wallet-sdk |
+| GitHub Repository | https://github.com/John-04/Solana-AI-Agent-Wallet |
 
 ---
 
-## ⚙️ How It Works
+## ✅ Verified On-Chain Transactions
 
-The system has three main layers:
+These are **real transactions on Solana Devnet** — permanently recorded and verifiable by anyone:
 
-### 1. Wallet Layer
-The `WalletManager` class handles all low-level Solana operations:
-- Generating new keypairs
-- Storing wallet data securely as JSON files
-- Checking SOL balances via RPC
-- Sending SOL between wallets
-- Requesting devnet airdrops
+| Description | Transaction Signature |
+|-------------|----------------------|
+| AI Agent Memo — dApp Interaction | [5DzKFVewijKW...](https://explorer.solana.com/tx/5DzKFVewijKWFjvPcy7zGtAS9a4HkgokHDKxQRTCQj73FX5qfZN9actmHSShQiv3c3bTaJrxYEHQzevt1V6YG7yJ?cluster=devnet) |
+| Agent Decision Recording | [2BVAXKrMGXL...](https://explorer.solana.com/tx/2BVAXKrMGXLpBZqAzVVJN3wapRmdd8qLN1iXQZniHb94msTU9YtcNnfwSmuKCx6onuu1FHq3yob6CoBjt8KByrKw?cluster=devnet) |
+| LangChain AI Agent Transaction | [2WXDieLCHpe...](https://explorer.solana.com/tx/2WXDieLCHpeSPsdWvUbC2AvzyVWAFyfEKPNs2GpdRjynFwvx93q3QvELbV2ofN6BvecHSbKtumgofgU2d9T3B1h?cluster=devnet) |
 
-### 2. Agent Layer
-The `AIAgent` class is the brain of the system:
-- Initializes with its own wallet on startup
-- Runs an autonomous decision loop every N seconds
-- Evaluates current balance and decides what action to take
-- Logs every action with timestamps and transaction signatures
-
-### 3. API + Dashboard Layer
-- Express.js REST API exposes all agent capabilities as HTTP endpoints
-- React frontend dashboard shows live wallet state, balance, and full action history
-- Dashboard auto-refreshes every 10 seconds
+All transactions show **Result: SUCCESS**, **Confirmation Status: FINALIZED**, **Confirmations: MAX**.
 
 ---
 
-## ✨ Features
+## 🧠 What is an AI Agent Wallet?
 
-| Feature | Description |
-|--------|-------------|
-| 🔑 Wallet Creation | Programmatically generate Solana wallets |
-| ✍️ Auto Transaction Signing | Sign and broadcast transactions autonomously |
-| 💰 SOL Management | Hold, send, and receive SOL |
-| 🧠 AI Decision Engine | Rule-based agent with autonomous logic |
-| 🔄 Autonomous Loop | Continuously runs and acts every 30 seconds |
-| 📝 Action History | Full log of every decision and transaction |
-| 🌐 REST API | 10 endpoints for full programmatic control |
-| 📊 Live Dashboard | Real-time React UI to observe the agent |
-| 👛 Multi-Wallet Support | Agent can spawn and manage sub-wallets |
-| 🔒 Key Security | Private keys never exposed via API |
+Traditional crypto wallets require **human approval** for every transaction. This project builds a wallet that AI agents control autonomously — no human needed.
+
+The agent:
+- Creates and manages Solana wallets programmatically
+- Signs transactions automatically without human input
+- Monitors market conditions and makes DeFi decisions every 20 seconds
+- Records every decision permanently on the Solana blockchain
+- Manages a portfolio of 3 wallets with autonomous rebalancing
+- Can be controlled by any AI framework via a published npm SDK
+
+---
+
+## 🚀 Key Features
+
+### 1. Autonomous Wallet Management
+- Programmatic keypair generation using `@solana/web3.js`
+- Secure key storage on server side — never exposed to frontend
+- SOL transfers between wallets without human input
+- Multi-wallet portfolio: Trading (40%), Reserve (40%), Operations (20%)
+
+### 2. DeFi Strategy Engine
+- Momentum-based trading strategy with Moving Average crossovers
+- Real-time SOL price feed from Jupiter Price API
+- BUY/SELL/HOLD signals with confidence percentages
+- Runs autonomously every 20 seconds
+- Paper trading in sandboxed environment (as required by bounty)
+
+### 3. Real On-Chain dApp Interaction
+- Every agent decision written to Solana blockchain via **Memo Program V1**
+- Official Solana on-chain program (used by real DeFi protocols)
+- Permanent, immutable audit trail of all autonomous decisions
+- 3 verified transactions with Solana Explorer links
+
+### 4. AgentWalletSDK — Published npm Package
+```bash
+npm install ai-agent-wallet-sdk
+```
+A standalone TypeScript SDK compatible with:
+- **LangChain** — use as a tool in LangChain agents
+- **AutoGen** — wrap as AutoGen function tool
+- **ElizaOS** — plugin for Eliza AI agents
+- **Any custom script** — works outside any browser context
+
+### 5. Proven LangChain Integration
+A real LangChain AI agent was built and demonstrated:
+- Installed the SDK from npm
+- Checked wallet balance on Solana devnet
+- Analyzed live market conditions
+- Executed a BUY decision
+- Recorded it permanently on-chain: [verify here](https://explorer.solana.com/tx/2WXDieLCHpeSPsdWvUbC2AvzyVWAFyfEKPNs2GpdRjynFwvx93q3QvELbV2ofN6BvecHSbKtumgofgU2d9T3B1h?cluster=devnet)
+
+### 6. Full REST API
+Complete REST API deployed on Render with 15+ endpoints for wallet management, agent control, and DeFi strategy.
 
 ---
 
 ## 🏗️ Architecture
 ```
-Solana-AI-Agent-Wallet/
-│
+AI Decision Layer          SDK Layer              Wallet Layer         Blockchain
+─────────────────    ─────────────────────    ─────────────────    ─────────────
+  AIAgent            AgentWalletSDK (npm)      WalletManager        Solana Devnet
+  DeFiStrategy   →   executeAgentDecision() →  signTransaction() →  Memo Program
+  LangChain          sendMemo()                sendSOL()            On-chain Txns
+  AutoGen            getWalletInfo()           createWallet()
+```
+
+### Project Structure
+```
+ai-agent-wallet/
 ├── src/
 │   ├── wallet/
-│   │   └── walletManager.ts     # Core Solana wallet operations
+│   │   └── walletManager.ts        # Core Solana wallet operations
 │   ├── agent/
-│   │   └── agent.ts             # AI decision engine + autonomous loop
+│   │   ├── agent.ts                # AI decision engine + portfolio management
+│   │   └── defiStrategy.ts         # DeFi momentum strategy engine
 │   ├── api/
-│   │   └── server.ts            # Express REST API server
-│   └── index.ts                 # Main entry point + demo runner
-│
-├── frontend/
+│   │   └── server.ts               # Express REST API (15+ endpoints)
+│   └── index.ts                    # Entry point
+├── sdk-package/                    # Published npm SDK
 │   ├── src/
-│   │   ├── App.jsx              # Main dashboard component
-│   │   └── main.jsx             # React entry point
-│   ├── index.html
-│   └── vite.config.js
-│
-├── wallets/                     # Auto-generated wallet JSON files
-├── .env                         # Environment config
-├── tsconfig.json                # TypeScript config
-├── package.json
-├── SKILLS.md
-└── README.md
+│   │   ├── AgentWalletSDK.ts       # Core SDK class
+│   │   └── index.ts                # Exports
+│   └── package.json                # npm: ai-agent-wallet-sdk
+├── frontend/                       # React 18 + Vite dashboard
+│   └── src/
+│       └── App.jsx                 # 5-tab dashboard UI
+├── langchain_agent_demo.py         # LangChain AI agent integration demo
+├── wallets/                        # Generated wallet JSON files
+├── SKILLS.md                       # Agent skills documentation
+└── README.md                       # This file
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 📦 AgentWalletSDK — API Reference
+```typescript
+import { AgentWalletSDK } from "ai-agent-wallet-sdk";
 
-| Layer | Technology |
-|-------|-----------|
-| Runtime | Node.js v20 + TypeScript |
-| Blockchain | @solana/web3.js v1.98 |
-| Backend | Express.js v5 |
-| Frontend | React 18 + Vite 5 |
-| Token Support | @solana/spl-token |
-| Key Encoding | bs58 |
-| Network | Solana Devnet |
-| Version Control | Git + GitHub |
-
----
-
-## 📋 Prerequisites
-
-Before running this project, make sure you have:
-
-- Node.js v20 or higher
-- npm v9 or higher
-- Git
-- A Solana devnet wallet with SOL (get free SOL at faucet.solana.com)
-
----
-
-## 🔧 Installation
-
-**1. Clone the repository:**
-```bash
-git clone https://github.com/John-04/Solana-AI-Agent-Wallet.git
-cd Solana-AI-Agent-Wallet
+// Initialize — works outside any browser context
+const sdk = new AgentWalletSDK({
+  privateKey: "your-base58-private-key", // optional
+  network: "devnet" // or "mainnet"
+});
 ```
 
-**2. Install backend dependencies:**
-```bash
-npm install
-```
+| Method | Description | Returns |
+|--------|-------------|---------|
+| `getWalletInfo()` | Get public key, balance, network | `WalletInfo` |
+| `sendSOL(address, amount)` | Transfer SOL to any address | `TransactionResult` |
+| `sendMemo(message)` | Write text permanently on-chain | `TransactionResult` |
+| `executeAgentDecision(decision)` | Execute + record AI decision on-chain | `TransactionResult` |
+| `requestAirdrop(amount)` | Request devnet SOL airdrop | `TransactionResult` |
+| `runAutonomousLoop(cycles)` | Run fully autonomous decision loop | `void` |
+| `exportWallet()` | Export wallet credentials | `{publicKey, privateKey}` |
+| `getActionLog()` | Get full action history | `AgentAction[]` |
 
-**3. Install frontend dependencies:**
-```bash
-cd frontend
-npm install
-cd ..
-```
+### LangChain Example
+```python
+from langchain_core.tools import Tool
 
-**4. Create environment file:**
-```bash
-cp .env.example .env
+def execute_wallet_action(decision: str) -> str:
+    import subprocess
+    result = subprocess.run(['node', '-e', f'''
+        const {{ AgentWalletSDK }} = require("ai-agent-wallet-sdk");
+        const sdk = new AgentWalletSDK({{ network: "devnet" }});
+        sdk.executeAgentDecision({{
+            action: "{decision}",
+            reasoning: "LangChain agent autonomous decision",
+            confidence: 85
+        }}).then(r => console.log(r.explorerUrl));
+    '''], capture_output=True, text=True)
+    return result.stdout
+
+wallet_tool = Tool(
+    name="SolanaWallet",
+    func=execute_wallet_action,
+    description="Execute DeFi decisions on Solana blockchain"
+)
 ```
 
 ---
 
-## 🚀 Running the Project
+## 🔌 REST API Reference
 
-### Start the Backend (Terminal 1)
-```bash
-npm run dev
-```
-
-You will see:
-```
-🚀 Starting AI Agent Wallet System...
-📌 STEP 1: Creating agent wallet...
-✅ Wallet created: <public-key>
-📌 STEP 2: Requesting devnet airdrop...
-📌 STEP 3: Checking balance...
-📌 STEP 4: Initializing AI Agent...
-📌 STEP 5: Agent making autonomous decision...
-📌 STEP 6: Action history...
-✅ AI Agent Wallet System Demo Complete!
-🚀 Server running on http://localhost:3000
-```
-
-### Start the Frontend (Terminal 2)
-```bash
-cd frontend
-npm run dev
-```
-
-Open your browser at **http://localhost:5173**
-
----
-
-## 🔌 API Documentation
-
-Base URL: `http://localhost:3000`
-
-### Health Check
-```
-GET /
-Response: { "status": "AI Agent Wallet is running", "timestamp": "..." }
-```
+Base URL: `https://solana-ai-agent-wallet.onrender.com`
 
 ### Agent Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | /agent/wallet | Get agent wallet public key and balance |
-| GET | /agent/history | Get full list of all agent actions |
-| POST | /agent/act | Manually trigger one autonomous decision |
-| POST | /agent/start | Start the autonomous loop |
-| POST | /agent/stop | Stop the autonomous loop |
+| GET | `/agent/wallet` | Get agent wallet info and balance |
+| GET | `/agent/history` | Get autonomous action history |
+| GET | `/agent/portfolio` | Get all portfolio wallets |
+| POST | `/agent/act` | Trigger one autonomous action |
+| POST | `/agent/start` | Start autonomous loop |
+| POST | `/agent/stop` | Stop autonomous loop |
 
 ### Wallet Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /wallet/create | Generate a new Solana wallet |
-| GET | /wallet/balance/:publicKey | Get SOL balance of any wallet |
-| POST | /wallet/send | Send SOL from one wallet to another |
-| POST | /wallet/airdrop | Request devnet SOL airdrop |
+| POST | `/wallet/create` | Create a new wallet |
+| GET | `/wallet/balance/:publicKey` | Get wallet balance |
+| POST | `/wallet/send` | Send SOL between wallets |
+| POST | `/wallet/airdrop` | Request devnet airdrop |
 
-### Example: Send SOL
+### DeFi Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/defi/state` | Get strategy engine state |
+| GET | `/defi/trades` | Get all trade history |
+| GET | `/defi/price` | Get current SOL price |
+| POST | `/defi/analyze` | Run market analysis |
+| POST | `/defi/swap` | Execute manual trade |
+| POST | `/defi/start` | Start strategy loop |
+| POST | `/defi/stop` | Stop strategy loop |
+
+---
+
+## 🛠️ Local Setup
+
+### Prerequisites
+- Node.js v20+
+- npm v9+
+- Git
+
+### Installation
 ```bash
-curl -X POST http://localhost:3000/wallet/send \
-  -H "Content-Type: application/json" \
-  -d '{
-    "fromPrivateKey": "YOUR_PRIVATE_KEY",
-    "toPublicKey": "DESTINATION_ADDRESS",
-    "amount": 0.1
-  }'
+# Clone the repository
+git clone https://github.com/John-04/Solana-AI-Agent-Wallet.git
+cd Solana-AI-Agent-Wallet
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+# Edit .env: set PORT=3000, SOLANA_NETWORK=devnet
+
+# Run backend
+npm run dev
+
+# In a new terminal, run frontend
+cd frontend
+npm install
+npm run dev
 ```
 
-### Example: Check Balance
+### Environment Variables
+```env
+PORT=3000
+SOLANA_NETWORK=devnet
+```
+
+### Available Scripts
 ```bash
-curl http://localhost:3000/wallet/balance/YOUR_PUBLIC_KEY
+npm run dev          # Start backend with ts-node
+npm run build        # Compile TypeScript
+npm run start        # Run compiled JS
+npm run sdk:demo     # Run AgentWalletSDK demo with real on-chain transactions
+```
+
+### Run LangChain Demo
+```bash
+# Install Python dependencies
+pip3 install langchain langchain-community --break-system-packages
+
+# Run the LangChain AI agent demo
+python3 langchain_agent_demo.py
 ```
 
 ---
 
-## 🧠 Agent Decision Logic
+## 🔒 Security
 
-The agent evaluates its balance on every cycle and autonomously decides what to do:
-```
-IF balance < 0.5 SOL
-  → Request airdrop from devnet faucet
+- Private keys are stored server-side and never exposed through the API or frontend
+- All keys use Ed25519 cryptography via `@solana/web3.js`
+- Agent autonomy is bounded: maximum 0.05 SOL per transfer action
+- All actions are logged with full audit trail
+- Strategy loop can be stopped via API at any time
+- HTTPS enforced on all deployed endpoints
 
-ELSE IF balance > 1.5 SOL
-  → Create a new sub-wallet
-  → Send 0.1 SOL to the sub-wallet autonomously
-
-ELSE
-  → Monitor and log current state
-```
-
-Every action is recorded with:
-- Action type (SEND, AIRDROP, CHECK_BALANCE, CREATE_WALLET)
-- Full payload (from, to, amount)
-- Timestamp
-- Transaction signature (verifiable on Solana Explorer)
+**Production considerations** (not implemented for devnet prototype):
+- HSM or AWS KMS for key storage
+- JWT authentication on API endpoints
+- Rate limiting and IP allowlisting
+- Multi-signature for large transfers
 
 ---
 
-## 🔒 Security Considerations
+## 📊 Bounty Requirements
 
-- **Private key isolation** — Keys are stored in local JSON files, never returned by the API
-- **Devnet only** — All transactions happen on Solana Devnet, no real funds at risk
-- **Environment variables** — Sensitive config managed via .env file
-- **Input validation** — All API endpoints validate inputs before processing
-- **Error boundaries** — All async operations wrapped in try/catch to prevent crashes
-- **Separation of concerns** — Agent logic is completely decoupled from wallet operations
+| Requirement | Status |
+|-------------|--------|
+| Create wallet programmatically | ✅ |
+| Sign transactions automatically | ✅ |
+| Hold SOL tokens | ✅ 5 SOL on devnet |
+| Interact with test dApp/protocol | ✅ Solana Memo Program — 3 verified txns |
+| Deep dive document (video or written) | ✅ |
+| Open-source code with README | ✅ |
+| SKILLS.md file | ✅ |
+| Working prototype on devnet | ✅ Live 24/7 |
+| Safe key management | ✅ Server-side only |
+| Multiple agents independently | ✅ 4 wallets managed |
+| External AI agent integration | ✅ Published npm SDK + LangChain proof |
 
 ---
 
-## 🌐 Live Demo
-- 🖥️ Frontend Dashboard: https://solana-ai-agent-wallet.vercel.app
-- 🔗 API Base URL: https://solana-ai-agent-wallet.onrender.com
-- 📁 GitHub: https://github.com/John-04/Solana-AI-Agent-Wallet
+## 🧰 Tech Stack
 
----
-
-## 👤 Team
-
-Built for the **DeFi Developer Challenge — Agentic Wallets for AI Agents** bounty on Superteam Nigeria.
-
-- **Developer**: John
-- **Network**: Solana Devnet
-- **Submission Date**: March 2026
+| Layer | Technology |
+|-------|-----------|
+| Blockchain | Solana Devnet, @solana/web3.js v1.98.4 |
+| Backend | Node.js v20, TypeScript, Express.js v5 |
+| Frontend | React 18, Vite 5, IBM Plex Mono |
+| SDK | TypeScript, published on npm |
+| AI Integration | LangChain, Python 3.12 |
+| Hosting | Render (backend), Vercel (frontend) |
+| Key Encoding | bs58 |
 
 ---
 
 ## 📄 License
 
-MIT License — see LICENSE file for details.
-EOF
+MIT License — open source, free to use and modify.
+
+---
+
+*Built for Superteam Nigeria DeFi Developer Challenge 2026*
+README_EOF
