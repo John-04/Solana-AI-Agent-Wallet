@@ -1,0 +1,36 @@
+{
+  "name": "ai-agent-wallet-sdk",
+  "version": "1.0.0",
+  "description": "A programmable Solana wallet SDK for AI agents — LangChain, AutoGen, ElizaOS compatible",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "solana",
+    "ai-agent",
+    "wallet",
+    "langchain",
+    "autogen",
+    "elizaos",
+    "defi",
+    "web3"
+  ],
+  "author": "john-04",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/John-04/Solana-AI-Agent-Wallet"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "ai-agent-wallet-sdk": "^1.0.0",
+    "bs58": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
